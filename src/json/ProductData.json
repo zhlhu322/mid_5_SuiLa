@@ -1,25 +1,22 @@
-[
-    {
-        "title": "Popular Books",
-        "data":[ 
-            {
-                "title": "飛向宇宙浩瀚無垠黑色短T",
-                "image":"https://github.com/zhlhu322/wk3_bookapp/blob/master/assets/fashionopolis.png?raw=true",
-                "name":"飛向宇宙浩瀚無垠黑色短T",
-                "price":"$480"
-            },
-            {
-                "title": "Chanel",
-                "image":"https://github.com/zhlhu322/wk3_bookapp/blob/master/assets/chanel.png?raw=true",
-                "name":"Chanel",
-                "price":"Patrick Mauriès"   
-            },
-            {
-                "title": "Calligraphy",
-                "image":"https://raw.githubusercontent.com/zhlhu322/wk3_bookapp/master/assets/Calligraphy.png",
-                "name":"Calligraphy",
-                "price":"June & Lucy"   
-            }
-        ]
-    }
-]
+{
+    "data": [
+        {
+            "title": "飛向宇宙浩瀚無垠黑色短T",
+            "image": "https://github.com/zhlhu322/wk3_bookapp/blob/master/assets/fashionopolis.png?raw=true",
+            "name": "飛向宇宙浩瀚無垠黑色短T",
+            "price": "$480"
+        },
+        {
+            "title": "Chanel",
+            "image": "https://github.com/zhlhu322/wk3_bookapp/blob/master/assets/chanel.png?raw=true",
+            "name": "Chanel",
+            "price": "Patrick Mauriès"
+        },
+        {
+            "title": "Calligraphy",
+            "image": "https://raw.githubusercontent.com/zhlhu322/wk3_bookapp/master/assets/Calligraphy.png",
+            "name": "Calligraphy",
+            "price": "June & Lucy"
+        }
+    ]
+}

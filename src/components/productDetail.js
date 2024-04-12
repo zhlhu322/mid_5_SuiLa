@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, VStack, Text, Image, Pressable } from "@gluestack-ui/themed";
+import { Box, VStack, Text, Image, Pressable, Center } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -9,7 +9,7 @@ const ProductDetail = ({ product }) => {
 
   return (
     <Box
-      width={150} height={190} elevation={1}
+      width={150} height={190} elevation={1} marginBottom={20}
     >
       <VStack justifyContent="space-around">
         <Pressable onPress={() => navigate('Detail', product)}>
@@ -25,7 +25,6 @@ const ProductDetail = ({ product }) => {
         </VStack>
 
       </VStack>
-
     </Box>
   );
 }

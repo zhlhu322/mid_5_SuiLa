@@ -3,18 +3,19 @@ import { TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Divider, Image, Text } from '@gluestack-ui/themed';
+import { Divider, HStack, Image, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; //還沒下載套件
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import HomeScreen from '../screens/HomeScreen';
 import ProductScreen from '../screens/ProductScreen';
 import PersonalinfoScreen from '../screens/PersonalinfoScreen';
-import FavoriteScreen from '../screens/FavoriteScreen'
+import FavoriteScreen from '../screens/FavoriteScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
 
 const Navigation = () => {
   return (
@@ -27,7 +28,7 @@ const Navigation = () => {
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="HomeStack"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: '#6A6A36',
         tabBarInactiveTintColor: '#6A6A36',
@@ -39,7 +40,7 @@ const MyTabs = () => {
       }}
     >
       <Tab.Screen
-        name="favorite"
+        name="Favorite"
         component={FavoriteScreen}
         options={{
           tabBarActiveTintColor: '#6A6A36',
@@ -69,7 +70,7 @@ const MyTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Personal"
+        name="PersonalinfoScreen"
         component={PersonalinfoScreen}
         options={{
           title: "Personal",
@@ -94,13 +95,19 @@ const HomeStack = ({navigation}) => {
         component={HomeScreen}
         options={{
           title:'',
-          headerRight:()=>( <MaterialCommunityIcons name="magnify" size={24} onPress={()=>alert('You have touched Search')} /> ),
+          headerRight:()=>( 
+            <Home_headerIcon/>
+            //<MaterialCommunityIcons name="magnify" size={24} onPress={()=>alert('You have touched Search')} /> 
+          ),
           headerShadowVisible:false,
+          headerStyle:{
+            backgroundColor:'#FEFFE6'
+          },
           headerLeft: () =>(
             <Image 
-            width={90} height={32}
-            source={{ uri:  }}
-            alt="ProductImage"
+              width={100} height={35}
+              source={{ uri: "https://github.com/zhlhu322/mid_5_SuiLa/blob/master/assets/logo_SuiLa.png?raw=true" }}
+              alt="logoimage"
             />
           ),
         }}
@@ -119,6 +126,19 @@ const HomeStack = ({navigation}) => {
     
   );
 }
+
+
+const Home_headerIcon = () => {
+  return(
+    <HStack  width={70} justifyContent='space-between'>
+      <MaterialCommunityIcons name="magnify" color='#6A6A36'size={26} onPress={()=>alert('You have touched Search')} />
+      <MaterialCommunityIcons name="cart" color='#6A6A36' size={26} onPress={()=>alert('You have touched Search')} /> 
+    </HStack>
+  );
+  
+  
+};
+
 
 const HeaderIcon = () => {
   const [iconName, setIconName] = useState('bookmark-outline'); 
