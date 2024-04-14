@@ -20,8 +20,8 @@ const FavoriteScreen = () => {
     )
     
     return (
-        <ScrollView style={{ backgroundColor: "#F5F7F1" }}>
-            <Box marginLeft={25} marginTop={40} >
+        <ScrollView style={{backgroundColor: "#F5F7F1"}}>
+            <Box marginLeft={25}  height="100%" mt={40} >
                 <FlatList
                     data={favorites}
                     renderItem={renderItem}
@@ -30,9 +30,10 @@ const FavoriteScreen = () => {
                 />
             </Box>
         </ScrollView>
+            
+      
 
     );
 }
-
 
 export default FavoriteScreen;
