@@ -8,7 +8,7 @@ const ProductDetail = ({ product }) => {
 
   return (
     <Box
-      width={150} height={190} elevation={1}
+      width={150} height={220} elevation={1}
     >
       <VStack justifyContent="space-around"
         style={{
@@ -28,9 +28,9 @@ const ProductDetail = ({ product }) => {
             borderRadius={8}
           />
         </Pressable>
-        <VStack height={40} justifyContent="space-evenly">
-          <Text fontSize={12} fontFamily="Roboto_500Medium" color="black">{product.title}</Text>
-          <Text fontSize={12} fontFamily="Roboto_500Medium" color="black" opacity={0.5}>{product.price}</Text>
+        <VStack height={60} justifyContent="space-evenly">
+          <Text fontSize={14}  color="black">{product.title}</Text>
+          <Text fontSize={14}  color="black" opacity={0.5}>{product.price}</Text>
         </VStack>
 
       </VStack>

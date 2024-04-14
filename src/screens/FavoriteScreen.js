@@ -29,14 +29,6 @@ const FavoriteScreen = () => {
                     numColumns={2}
                 />
             </Box>
-            {/*<Center bg="emerald.100" flex={1}>
-                {favorites.map((item, index) => (
-                    <Text key={index} fontSize={20}>
-                        {item.title} - {item.price}
-                    </Text>
-                ))}
-            </Center> */}
-            
         </ScrollView>
 
     );

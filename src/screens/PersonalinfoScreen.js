@@ -20,29 +20,36 @@ const PersonalinfoScreen = () => {
             mt={60}
             borderWidth={1.5}
             borderColor='#C8C8A9'
-            source={"https://github.com/zhlhu322/mid_5_SuiLa/blob/master/assets/669189db793d9dad2ac4026b0cbfdfc7.jpg?raw=true"}
-            alt='albumImage'
+            source={"https://i.pinimg.com/564x/b9/0b/7a/b90b7a981f6cbb6df12dabe9c962faff.jpg"}
+            alt='personalImage'
           />
-          <Box marginLeft={20} marginTop={60}>
-            <Text fontWeight='400'
-              color='black'
-              fontSize={23}
-              lineHeight={35}
-              marginLeft={10}
-            >歡迎，小美
-            </Text>
-           
-          </Box>
+          <Text fontWeight='400'
+            color='black'
+            fontSize={23}
+            lineHeight={35}
+            marginLeft={30}
+            marginTop={60}
+          >歡迎，小美
+          </Text>
         </Box>
+        <HStack alignItems='center' marginBottom={10}>
+          <Text fontWeight='400'
+            color='#6A6A36'
+            fontSize={16}
+            lineHeight={35}
+            marginRight={8}
+          >160 cm / 45 kg
+          </Text>
+          <MaterialCommunityIcons name="eye-outline" size={20} color='#6A6A36' />
+        </HStack>
       </Box>
       <Box
         flexGrow={1}
         bg='#F5F7F1'
         alignItems="center"
-        padding="20px"
         height="100%"
       >
-        <HStack justifyContent="space-between" alignItems="center" mt={20}>
+        <HStack width="100%" justifyContent="space-evenly" alignItems="center" mt={50}>
           <Pressable
             justifyContent="center"
             alignItems="center"
@@ -53,9 +60,9 @@ const PersonalinfoScreen = () => {
             onPress={() => Linking.openURL()}
             style={{
               borderRadius: 18,
-              shadowColor:"#C8C8A9",
-              shadowOffset:{
-                width:3,height:6
+              shadowColor: "#C8C8A9",
+              shadowOffset: {
+                width: 3, height: 6
               },
               shadowRadius: 4,
               shadowOpacity: 0.4,
@@ -81,9 +88,9 @@ const PersonalinfoScreen = () => {
             onPress={() => Linking.openURL()}
             style={{
               borderRadius: 18,
-              shadowColor:"#C8C8A9",
-              shadowOffset:{
-                width:3,height:6
+              shadowColor: "#C8C8A9",
+              shadowOffset: {
+                width: 3, height: 6
               },
               shadowRadius: 4,
               shadowOpacity: 0.4,
@@ -109,9 +116,9 @@ const PersonalinfoScreen = () => {
             onPress={() => Linking.openURL()}
             style={{
               borderRadius: 18,
-              shadowColor:"#C8C8A9",
-              shadowOffset:{
-                width:3,height:6
+              shadowColor: "#C8C8A9",
+              shadowOffset: {
+                width: 3, height: 6
               },
               shadowRadius: 4,
               shadowOpacity: 0.4,
@@ -127,8 +134,8 @@ const PersonalinfoScreen = () => {
               letterSpacing={1.2}
             >會員資料</Text>
           </Pressable>
-          </HStack>
-          <HStack justifyContent="space-between" alignItems="center" mt={20}>
+        </HStack>
+        <HStack width="100%" justifyContent="space-evenly" alignItems="center" mt={20}>
           <Pressable
             justifyContent="center"
             alignItems="center"
@@ -139,9 +146,9 @@ const PersonalinfoScreen = () => {
             onPress={() => Linking.openURL()}
             style={{
               borderRadius: 18,
-              shadowColor:"#C8C8A9",
-              shadowOffset:{
-                width:3,height:6
+              shadowColor: "#C8C8A9",
+              shadowOffset: {
+                width: 3, height: 6
               },
               shadowRadius: 4,
               shadowOpacity: 0.4,
@@ -167,9 +174,9 @@ const PersonalinfoScreen = () => {
             onPress={() => Linking.openURL()}
             style={{
               borderRadius: 18,
-              shadowColor:"#C8C8A9",
-              shadowOffset:{
-                width:3,height:6
+              shadowColor: "#C8C8A9",
+              shadowOffset: {
+                width: 3, height: 6
               },
               shadowRadius: 4,
               shadowOpacity: 0.4,
@@ -195,9 +202,9 @@ const PersonalinfoScreen = () => {
             onPress={() => Linking.openURL()}
             style={{
               borderRadius: 18,
-              shadowColor:"#C8C8A9",
-              shadowOffset:{
-                width:3,height:6
+              shadowColor: "#C8C8A9",
+              shadowOffset: {
+                width: 3, height: 6
               },
               shadowRadius: 4,
               shadowOpacity: 0.4,

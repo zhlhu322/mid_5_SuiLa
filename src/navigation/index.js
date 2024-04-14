@@ -36,7 +36,9 @@ const TopTabs = () => {
           backgroundColor: '#C8C8A9',
           height: 50,
           borderRightWidth: 1,
-          borderRightColor: '#C8C8A9'
+          borderRightColor: '#C8C8A9',
+          borderBottomColor:'#BEBEB0',
+          borderBottomWidth:0.8,
         },
         tabBarInactiveTintColor: '#F5F7F1',
         tabBarActiveTintColor: '#F5F7F1',
@@ -57,7 +59,7 @@ const TopTabs = () => {
         component={HomeScreen}
         options={{
           tabBarLabel: "Top10",
-          tabBarLabelStyle: { fontSize: 12 },
+          tabBarLabelStyle: { fontSize: 14 },
         }}
       />
       <TopTab.Screen
@@ -65,7 +67,7 @@ const TopTabs = () => {
         component={HomeScreen}
         options={{
           tabBarLabel: "Newest",
-          tabBarLabelStyle: { fontSize: 12 },
+          tabBarLabelStyle: { fontSize: 14 },
         }}
       />
 
@@ -74,7 +76,7 @@ const TopTabs = () => {
         component={HomeScreen}
         options={{
           tabBarLabel: "In stock",
-          tabBarLabelStyle: { fontSize: 12 },
+          tabBarLabelStyle: { fontSize: 14 },
         }}
       />
 
@@ -141,10 +143,6 @@ const BottomTabs = () => {
           tabBarActiveTintColor: '#6A6A36',
           tabBarInactiveTintColor: '#6A6A36',
           headerShown: false,
-          headerTitleStyle: {
-            fontWeight: '400',
-            fontSize: 20
-          },
         }}
       />
       <BottomTab.Screen

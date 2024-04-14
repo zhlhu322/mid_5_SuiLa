@@ -73,13 +73,13 @@ const ProductScreen = ({ route }) => {
                                 textAlign='left'
                                 fontSize={20}
                                 lineHeight={28}
-                                fontWeight='450'
+                                fontWeight='400'
                             >{title}</Text>
                             <Text
                                 color='#131313'
                                 textAlign='left'
                                 fontSize={16}
-                                fontWeight='350'
+                                fontWeight='400'
                                 lineHeight={24}
                                 opacity={0.5}
                             >{price}</Text>
@@ -162,7 +162,7 @@ const ProductScreen = ({ route }) => {
                         >尺寸表</Text>
                     </Box>
                     <Image
-                        style={{ height: 300, width: 300, marginTop: 20 }}
+                        style={{ height: 130, width: 300, marginTop: 20,opacity:0.8 }}
                         source={{ uri: size_chart }}
                     />
                     <Box mt={5} width="75%">
