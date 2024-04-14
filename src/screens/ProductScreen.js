@@ -20,17 +20,17 @@ const ProductScreen = ({ route }) => {
     const favorites = useSelector(selectFavorites);
     const CustomBackButton = () => {
         const navigation = useNavigation();
-      
+
         const handleBackPress = () => {
-          navigation.goBack();
+            navigation.goBack();
         };
-      
+
         return (
-          <TouchableOpacity onPress={handleBackPress}>
-            <MaterialCommunityIcons name="chevron-left" size={30} />
-          </TouchableOpacity>
+            <TouchableOpacity onPress={handleBackPress}>
+                <MaterialCommunityIcons name="chevron-left" size={30} />
+            </TouchableOpacity>
         );
-      };
+    };
 
     const isFavorite = favorites.some(item => item.title === title);
     const toggleFavorite = () => {
@@ -46,16 +46,18 @@ const ProductScreen = ({ route }) => {
 
     return (
         <Center bgColor="white" height="100%">
+            <Box color="#000000" bgColor='#F5F7F1' >
+                <CustomBackButton />
+            </Box>
             <ScrollView bgColor='#F5F7F1' w='100%' h='100%'>
                 <Center>
-                    
-                    <Box color="#000000">
-                        <CustomBackButton />
-                    </Box>
                     <Image
                         style={{ height: 300, width: 300, marginTop: 20 }}
                         source={{ uri: image }}
+
                     />
+
+
                     <HStack justifyContent="space-between" alignItems="center">
                         <Box mt={5} width="70%" >
                             <Text
