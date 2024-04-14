@@ -26,9 +26,17 @@ const ProductScreen = ({ route }) => {
         };
 
         return (
-            <TouchableOpacity onPress={handleBackPress}>
-                <MaterialCommunityIcons name="chevron-left" size={30} />
-            </TouchableOpacity>
+            <TouchableOpacity 
+            onPress={handleBackPress}
+            style={{
+                position: 'absolute',
+                top: 10,            
+                left: 10,           
+                zIndex: 1            
+            }}
+        >
+            <MaterialCommunityIcons name="chevron-left" size={30} color="#000" />
+        </TouchableOpacity>
         );
     };
 
@@ -46,10 +54,9 @@ const ProductScreen = ({ route }) => {
 
     return (
         <Center bgColor="white" height="100%">
-            <Box color="#000000" bgColor='#F5F7F1' >
-                <CustomBackButton />
-            </Box>
+            <CustomBackButton/>
             <ScrollView bgColor='#F5F7F1' w='100%' h='100%'>
+            
                 <Center>
                     <Image
                         style={{ height: 300, width: 300, marginTop: 20 }}
