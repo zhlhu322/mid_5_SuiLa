@@ -159,6 +159,17 @@ const ProductScreen = ({ route }) => {
                             fontSize={16}
                             lineHeight={28}
                             fontWeight='400'
+                        >尺寸表</Text>
+                    </Box>
+                    <Box mt={5} width="75%">
+                        <Text
+                            mt={15}
+                            mb={-5}
+                            color='#6A6A36'
+                            textAlign='center'
+                            fontSize={16}
+                            lineHeight={28}
+                            fontWeight='400'
                         >·. ･ ｡⁺   ๋₊ ▾ ⋆ ⑅ ▸◂  ྀྀི 實拍  ྀྀི  · ⁺     ִִֶָ ٠˟ ⋆ ⑅ ▸◂ ࿔*</Text>
                     </Box>
                     <Image
