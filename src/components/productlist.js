@@ -3,14 +3,19 @@ import { FlatList } from "react-native";
 import { Box, Text } from "@gluestack-ui/themed";
 
 import ProductDetail from './productDetail';
-import ProductData from '../json/ProductData.json'
 
-const Productlist = () => {
-  const renderItem = ({ item }) => < ProductDetail product={item} />
+
+
+const Productlist = ({list}) => {
+  const renderItem = ({ item }) => (
+    <Box marginRight={40} marginBottom={20}>
+      < ProductDetail product={item} />
+    </Box>
+  )
   return (
-    <Box marginLeft={16} marginBottom={16} width={340}>
+    <Box marginLeft={25} marginTop={40} >
       <FlatList
-        data={ProductData.data}
+        data={list}
         renderItem={renderItem}
         keyExtractor={item => item.title}
         numColumns={2}
@@ -18,6 +23,5 @@ const Productlist = () => {
     </Box>
   );
 }
-
 
 export default Productlist;

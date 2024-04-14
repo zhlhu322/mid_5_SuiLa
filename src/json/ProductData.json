@@ -1,22 +1,67 @@
 {
     "data": [
         {
+            "image": "https://i.pinimg.com/564x/68/ed/2d/68ed2d24e804674a0b2dbd41490789f1.jpg",
             "title": "飛向宇宙浩瀚無垠黑色短T",
-            "image": "https://github.com/zhlhu322/wk3_bookapp/blob/master/assets/fashionopolis.png?raw=true",
-            "name": "飛向宇宙浩瀚無垠黑色短T",
-            "price": "$480"
+            "price": "$480",
+            "img1": "https://i.pinimg.com/564x/68/ed/2d/68ed2d24e804674a0b2dbd41490789f1.jpg",
+            "img2": "https://i.pinimg.com/564x/68/ed/2d/68ed2d24e804674a0b2dbd41490789f1.jpg",
+            "img3": "https://i.pinimg.com/564x/68/ed/2d/68ed2d24e804674a0b2dbd41490789f1.jpg",
+            "img4": "https://i.pinimg.com/564x/68/ed/2d/68ed2d24e804674a0b2dbd41490789f1.jpg"
         },
         {
-            "title": "Chanel",
-            "image": "https://github.com/zhlhu322/wk3_bookapp/blob/master/assets/chanel.png?raw=true",
-            "name": "Chanel",
-            "price": "Patrick Mauriès"
+            "image": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "title": "冰塊一包",
+            "price": "$500",
+            "img1": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img2": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img3": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img4": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg"
         },
         {
-            "title": "Calligraphy",
-            "image": "https://raw.githubusercontent.com/zhlhu322/wk3_bookapp/master/assets/Calligraphy.png",
-            "name": "Calligraphy",
-            "price": "June & Lucy"
+            "image": "https://i.pinimg.com/564x/fc/a3/bf/fca3bf82d508539aef9b6760d7abf159.jpg",
+            "title": "哇哇",
+            "price": "$1430",
+            "img1": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img2": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img3": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img4": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg"
+        },
+        {
+            "image": "https://i.pinimg.com/564x/43/8c/23/438c23216e51ebe0c9856cdb747acb6c.jpg",
+            "title": "哇",
+            "price": "$1430",
+            "img1": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img2": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img3": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img4": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg"
+        },
+        {
+            "image": "https://i.pinimg.com/564x/35/df/62/35df6200b6384b10918631d58487fcbf.jpg",
+            "title": "123",
+            "price": "$1430",
+            "img1": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img2": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img3": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img4": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg"
+        },
+        {
+            "image": "https://i.pinimg.com/564x/0b/e3/a7/0be3a7078b29e32a81e2cb1c402fba5a.jpg",
+            "title": "456",
+            "price": "$1430",
+            "img1": "https://i.pinimg.com/564x/b9/28/1d/b9281d8ffa0801de16525127255a7105.jpg",
+            "img2": "https://instylebuy.com/wp-content/uploads/2023-12-03/06-41/BE40171_3-768x1023.jpg",
+            "img3": "https://instylebuy.com/wp-content/uploads/2023-12-03/06-42/BE40171_8-768x1023.jpg",
+            "img4": "https://github.com/zhlhu322/wk5_bookapp/blob/master/assets/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-04-14%20110149.png?raw=true"
+        },
+        {
+            "image": "https://i.pinimg.com/564x/00/8b/ee/008beefb04f1b2610269e352d155236e.jpg",
+            "title": "yo",
+            "price": "$1430",
+            "img1": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img2": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img3": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg",
+            "img4": "https://i.pinimg.com/564x/d5/d8/13/d5d813f2d56762204c0dad545a65e9e9.jpg"
         }
     ]
 }

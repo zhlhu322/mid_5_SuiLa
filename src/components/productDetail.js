@@ -3,24 +3,33 @@ import { Box, VStack, Text, Image, Pressable, Center } from "@gluestack-ui/theme
 import { useNavigation } from "@react-navigation/native";
 
 
-
 const ProductDetail = ({ product }) => {
   const { navigate } = useNavigation();
 
   return (
     <Box
-      width={150} height={190} elevation={1} marginBottom={20}
+      width={150} height={190} elevation={1}
     >
-      <VStack justifyContent="space-around">
+      <VStack justifyContent="space-around"
+        style={{
+          shadowColor:"#C8C8A9",
+          shadowOffset:{
+            width:3,height:2
+          },
+          shadowRadius: 4,
+          shadowOpacity: 0.4,
+        }}
+      >
         <Pressable onPress={() => navigate('Detail', product)}>
           <Image
             width={150} height={150}
             source={{ uri: product.image }}
             alt="ProductImage"
+            borderRadius={8}
           />
         </Pressable>
         <VStack height={40} justifyContent="space-evenly">
-          <Text fontSize={12} fontFamily="Roboto_500Medium" color="black">{product.name}</Text>
+          <Text fontSize={12} fontFamily="Roboto_500Medium" color="black">{product.title}</Text>
           <Text fontSize={12} fontFamily="Roboto_500Medium" color="black" opacity={0.5}>{product.price}</Text>
         </VStack>
 
