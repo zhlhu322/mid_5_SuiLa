@@ -13,7 +13,7 @@ import { selectFavorites, addFavorite, removeFavorite } from '../redux/favorites
 
 
 const ProductScreen = ({ route }) => {
-    const { title, image, price, img1, img2, img3, img4 } = route.params;
+    const { title, image, price, size_chart, img1, img2, img3, img4 } = route.params;
 
     const likeicon = useSelector(selectLike);  //取得state
     const dispatch = useDispatch();
@@ -154,13 +154,17 @@ const ProductScreen = ({ route }) => {
                         <Text
                             mt={15}
                             mb={-5}
-                            color='#6A6A36'
+                            color='#000000'
                             textAlign='left'
                             fontSize={16}
                             lineHeight={28}
                             fontWeight='400'
                         >尺寸表</Text>
                     </Box>
+                    <Image
+                        style={{ height: 300, width: 300, marginTop: 20 }}
+                        source={{ uri: size_chart }}
+                    />
                     <Box mt={5} width="75%">
                         <Text
                             mt={15}
