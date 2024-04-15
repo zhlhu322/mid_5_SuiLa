@@ -45,12 +45,9 @@ const ProductScreen = ({ route }) => {
         if (isFavorite) {
             dispatch(removeFavorite({ title }));
         } else {
-            dispatch(addFavorite({ title, image, price }));
+            dispatch(addFavorite({ title,image,price,img1,img2,img3,img4,size_chart }));
         }
     };
-
-
-    //useEffect(()=>{ dispatch(setLike({likeicon}))}, likeicon );
 
     return (
         <Center bgColor="white" height="100%">

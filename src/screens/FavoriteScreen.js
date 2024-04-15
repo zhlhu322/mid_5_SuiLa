@@ -12,7 +12,6 @@ import { selectFavorites } from '../redux/favoritesSlice';
 const FavoriteScreen = () => {
     const favorites = useSelector(selectFavorites);
     
-
     const renderItem = ({ item }) => (
         <Box marginRight={40} marginBottom={20}>
             < ProductDetail product={item} />
@@ -31,7 +30,6 @@ const FavoriteScreen = () => {
             </Box>
         </ScrollView>
             
-      
 
     );
 }
