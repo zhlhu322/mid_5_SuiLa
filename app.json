@@ -16,7 +16,11 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "your.bundle.identifier"
+      "bundleIdentifier": "com.yourname.yourapp",
+      "infoPlist": {
+        "NSCameraUsageDescription": "這個應用需要使用你的相機來拍照。",
+        "NSPhotoLibraryAddUsageDescription": "這個應用需要訪問你的相冊來儲存拍攝的照片。"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -38,6 +42,16 @@
     },
     "updates": {
       "url": "https://u.expo.dev/6b06061c-7b72-459b-91f7-71371bdb00c4"
-    }
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
+    ]
   }
 }

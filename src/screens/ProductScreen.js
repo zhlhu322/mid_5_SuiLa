@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Linking, Image } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
+import { Linking, Image, Modal, View, TextInput } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Center, ScrollView, Box, Text, Pressable, HStack } from "@gluestack-ui/themed";
+import { Center, ScrollView, Box, Text, Pressable, HStack, VStack } from "@gluestack-ui/themed";
 import { TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
@@ -11,13 +12,37 @@ import { selectLike, setLike, toggleLike } from '../redux/likeSlice';
 
 import { selectFavorites, addFavorite, removeFavorite } from '../redux/favoritesSlice';
 
+import { Camera } from 'expo-camera';
 
 const ProductScreen = ({ route }) => {
     const { title, image, price, size_chart, img1, img2, img3, img4 } = route.params;
+    const { navigate } = useNavigation();
+
 
     const likeicon = useSelector(selectLike);  //取得state
     const dispatch = useDispatch();
     const favorites = useSelector(selectFavorites);
+    const [cart_modalVisible, setModalVisible] = useState(false); //控制購物車選單是否出現
+    const [selectedSize, setSelectedSize] = useState(''); //儲存選擇的尺寸
+    const [quantity, setQuantity] = useState(1); //儲存選擇的數量
+    const cart_toggleModal = () => {
+        setModalVisible(!cart_modalVisible); //切換購物車選單的顯示及隱藏
+    };
+
+    const addToCartHandler = () => {
+        const product = {
+            title: route.params.title,
+            image: route.params.image,
+            price: route.params.price,
+            size: selectedSize, 
+            quantity: quantity    
+        };
+        dispatch(addToCart(product));
+        cart_toggleModal(); 
+    };
+
+    
+
     const CustomBackButton = () => {
         const navigation = useNavigation();
 
@@ -47,6 +72,12 @@ const ProductScreen = ({ route }) => {
         } else {
             dispatch(addFavorite({ title,image,price,img1,img2,img3,img4,size_chart }));
         }
+    };
+    const addToCart = (product) => {
+        return {
+            type: 'ADD_TO_CART',
+            payload: product
+        };
     };
 
     return (
@@ -90,7 +121,50 @@ const ProductScreen = ({ route }) => {
                             />
                         </Pressable>
                     </HStack>
-                    <HStack justifyContent="center" mt={20} spacing={0}
+                    
+
+                    
+                    <Modal //以下是購物選單框框
+                        animationType="slide"
+                        transparent={true}
+                        visible={cart_modalVisible}
+                        onRequestClose={cart_toggleModal}
+                    >
+                        <Center flex={1} justifyContent="flex-end">
+                            <View style={{
+                                width:'100%',
+                                backgroundColor: '#FFF',
+                                borderTopLeftRadius: 20,
+                                borderTopRightRadius: 20,
+                                padding: 20,
+                                paddingBottom: 40,
+                            }}>
+                                <Text>選擇尺寸</Text>
+                                <Picker
+                                    selectedValue={selectedSize}
+                                    onValueChange={(itemValue, itemIndex) => setSelectedSize(itemValue)}
+                                    style={{ marginTop: 10 }}
+                                >
+                                    <Picker.Item label="S" value="S" />
+                                    <Picker.Item label="M" value="M" />
+                                    <Picker.Item label="L" value="L" />
+                                </Picker>
+                                <Text>選擇數量</Text>
+                                <TextInput
+                                    value={quantity.toString()}
+                                    onChangeText={text => setQuantity(parseInt(text) || 0)}
+                                    keyboardType="numeric"
+                                    style={{ borderWidth: 1, borderColor: '#ccc', borderRadius: 5, padding: 10, marginTop: 10 }}
+                                />
+                                <Pressable onPress={addToCartHandler} style={{ marginTop: 20 }}>
+                                    <Text style={{ color: '#007BFF' }}>加入</Text>
+                                </Pressable>
+                            </View>
+                        </Center>
+                    </Modal>
+
+                    
+                    <HStack justifyContent="center" mt={20} spacing={0} //以下是加入購物車跟直接購買的按鈕
                         style={{
                             shadowColor: "#C8C8A9",
                             shadowOffset: {
@@ -105,7 +179,7 @@ const ProductScreen = ({ route }) => {
                             w={150}
                             h={36}
                             backgroundColor="#FEFFE6"
-                            onPress={() => Linking.openURL()}
+                            onPress={addToCartHandler}
                             style={{
                                 borderTopLeftRadius: 18,
                                 borderBottomLeftRadius: 18,
@@ -128,7 +202,7 @@ const ProductScreen = ({ route }) => {
                             w={150}
                             h={36}
                             backgroundColor="#FEFFE6"
-                            onPress={() => Linking.openURL()}
+                            onPress={cart_toggleModal}
                             style={{
                                 borderTopRightRadius: 18,
                                 borderBottomRightRadius: 18,
@@ -147,7 +221,21 @@ const ProductScreen = ({ route }) => {
                             >Buy now!</Text>
                         </Pressable>
                     </HStack>
+
+                    
                     <Box mt={5} width="75%">
+                        <Pressable onPress={() => navigate('camera')}>
+                            <Text
+                                mt={15}
+                                mb={-5}
+                                color='#0078CF'
+                                textAlign='left'
+                                fontSize={16}
+                                lineHeight={28}
+                                fontWeight='400'
+                            >線上試衣間</Text>
+                        </Pressable>
+                        
                         <Text
                             mt={15}
                             mb={-5}
@@ -162,6 +250,7 @@ const ProductScreen = ({ route }) => {
                         style={{ height: 130, width: 300, marginTop: 20,opacity:0.8 }}
                         source={{ uri: size_chart }}
                     />
+                    
                     <Box mt={5} width="75%">
                         <Text
                             mt={15}

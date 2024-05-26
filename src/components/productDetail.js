@@ -30,7 +30,7 @@ const ProductDetail = ({ product }) => {
         </Pressable>
         <VStack height={60} justifyContent="space-evenly">
           <Text fontSize={14}  color="black">{product.title}</Text>
-          <Text fontSize={14}  color="black" opacity={0.5}>{product.price}</Text>
+          <Text fontSize={14}  color="black" opacity={0.5}>${product.price}</Text>
         </VStack>
 
       </VStack>

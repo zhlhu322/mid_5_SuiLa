@@ -2,9 +2,7 @@ import React from "react";
 import { FlatList } from "react-native";
 import { Box, Text } from "@gluestack-ui/themed";
 
-import ProductDetail from './productDetail';
-
-
+import ProductDetail from './ProductDetail';
 
 const Productlist = ({list}) => {
   const renderItem = ({ item }) => (
@@ -13,7 +11,7 @@ const Productlist = ({list}) => {
     </Box>
   )
   return (
-    <Box marginLeft={25} marginTop={40} >
+    <Box marginLeft={25} marginTop={15} >
       <FlatList
         data={list}
         renderItem={renderItem}

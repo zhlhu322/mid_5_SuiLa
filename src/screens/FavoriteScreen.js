@@ -2,7 +2,7 @@ import React from "react";
 import { Text, Center, Box } from "@gluestack-ui/themed";
 import { FlatList } from "react-native";
 import { ScrollView } from "@gluestack-ui/themed";
-import ProductDetail from '../components/productDetail';
+import ProductDetail from '../components/ProductDetail';
 
 import { useSelector } from 'react-redux';
 import { selectFavorites } from '../redux/favoritesSlice';

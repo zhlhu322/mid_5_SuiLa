@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { HStack, Image, Text, Box } from '@gluestack-ui/themed';
-import { useNavigation } from '@react-navigation/native';
+import { HStack, Image, Box, Input } from '@gluestack-ui/themed';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as Animatable from 'react-native-animatable';
+import { Animated,TextInput } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+
 
 import HomeScreen from '../screens/HomeScreen';
 import ProductScreen from '../screens/ProductScreen';
 import PersonalinfoScreen from '../screens/PersonalinfoScreen';
 import FavoriteScreen from '../screens/FavoriteScreen';
+import CameraScreen from '../screens/cameraScreen';
+import HomeHeaderIcon from '../components/HomeHeaderIcon';
+
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -118,7 +123,7 @@ const BottomTabs = () => {
           tabBarInactiveTintColor: '#6A6A36',
           headerRight: () => (
             <Box marginRight={16}>
-              <Home_headerIcon />
+              <HomeHeaderIcon />
             </Box>
           ),
           headerStyle: {
@@ -164,7 +169,7 @@ const HomeStack = ({ navigation }) => {
     <Stack.Navigator
       screenOptions={{
         headerRight: () => (
-          <Home_headerIcon />
+          <HomeHeaderIcon />
         ),
         headerShadowVisible: false,
         headerStyle: {
@@ -193,21 +198,16 @@ const HomeStack = ({ navigation }) => {
           title: '',
           }}
        />
+       <Stack.Screen
+        name="camera"
+        component={CameraScreen}
+        options={{
+          title: '',
+          }}
+       />
     </Stack.Navigator>
 
   );
 }
-
-
-/*把header的兩個icon包在一起、action寫在外面*/
-const Home_headerIcon = () => {
-  return (
-    <HStack width={70} justifyContent='space-between'>
-      <MaterialCommunityIcons name="magnify" color='#6A6A36' size={26} onPress={() => alert('You have touched Search')} />
-      <MaterialCommunityIcons name="cart" color='#6A6A36' size={26} onPress={() => alert('You have touched Search')} />
-    </HStack>
-  );
-};
-
 
 export default Navigation;
