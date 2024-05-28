@@ -1,12 +1,14 @@
-import { CameraView, useCameraPermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions} from 'expo-camera';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Box, VStack,Image, Pressable, Center } from "@gluestack-ui/themed";
-import { useNavigation } from "@react-navigation/native";
+import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { Center } from "@gluestack-ui/themed";
+
+import { useNavigation } from '@react-navigation/native';
 
 export default function App() {
   const [facing, setFacing] = useState('back');
   const [permission, requestPermission] = useCameraPermissions();
+  const navigation = useNavigation();
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -23,6 +25,7 @@ export default function App() {
     );
   }
 
+  //可切換前後鏡頭
   function toggleCameraFacing() {
     setFacing(current => (current === 'back' ? 'front' : 'back'));
   }
@@ -30,20 +33,23 @@ export default function App() {
   return (
     <View style={styles.container}>
       <CameraView style={styles.camera} facing={facing}>
-        <View style={styles.buttonContainer}>
-        <Center>
-            <Image
-            width={500} height={500}
+        <Center style={styles.containimgnbutton}>
+          <Image
+            style={styles.img}
+            width={400} height={400}
             source={{ uri: "https://github.com/zhlhu322/mid_5_SuiLa/blob/master/assets/01887672800-e1-removebg-preview.png?raw=true" }}
             alt="ProductImage"
-            borderRadius={8}
           />
-          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <Text style={styles.text}>Flip Camera</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button2} onPress={ ()=> { navigation.goBack();} }>
+              <Text style={styles.text}>返回</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+              <Text style={styles.text}>切換鏡頭</Text>
+            </TouchableOpacity>
+          </View>
         </Center>
-        
-        </View>
+       
       </CameraView>
     </View>
   );
@@ -57,19 +63,33 @@ const styles = StyleSheet.create({
   camera: {
     flex: 1,
   },
+  containimgnbutton:{
+    display:'flex',
+    flexDirection:'column',
+    gap:100
+  },
   buttonContainer: {
-    flex: 1,
     flexDirection: 'row',
     backgroundColor: 'transparent',
-    margin: 64,
+    paddingHorizontal: 30,
+    justifyContent:'space-between'
   },
   button: {
     flex: 1,
     alignItems: 'center',
+    justifyContent:'center'
+  },
+  button2: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent:'center'
   },
   text: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
   },
+  img: {
+    marginTop:100
+  }
 });

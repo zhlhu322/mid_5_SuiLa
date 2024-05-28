@@ -2,8 +2,15 @@ import React from 'react';
 import { Box, Text, Image } from '@gluestack-ui/themed';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Center, ScrollView, Pressable, HStack } from "@gluestack-ui/themed";
+import { useNavigation } from '@react-navigation/native';
+import { Linking } from 'react-native';
+
+
+
 
 const PersonalinfoScreen = () => {
+  const { navigate } = useNavigation();
+
   return (
     <Box direction="column">
       <Box
@@ -12,7 +19,7 @@ const PersonalinfoScreen = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Box h={300} justifyContent="space-around" flexDirection="row" alignItems="center">
+        <Box h={200} justifyContent="space-around" flexDirection="row" alignItems="center">
           <Image
             h={110}
             w={110}
@@ -57,7 +64,7 @@ const PersonalinfoScreen = () => {
             h={80}
             m={10}
             backgroundColor="#FEFFE6"
-            onPress={() => Linking.openURL()}
+            onPress={() => navigate('OrderScreen')}
             style={{
               borderRadius: 18,
               shadowColor: "#C8C8A9",

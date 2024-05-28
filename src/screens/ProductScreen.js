@@ -4,15 +4,12 @@ import { Linking, Image, Modal, View, TextInput } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Center, ScrollView, Box, Text, Pressable, HStack, VStack } from "@gluestack-ui/themed";
 import { TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLike, setLike, toggleLike } from '../redux/likeSlice';
 
 import { selectFavorites, addFavorite, removeFavorite } from '../redux/favoritesSlice';
-
-import { Camera } from 'expo-camera';
 
 const ProductScreen = ({ route }) => {
     const { title, image, price, size_chart, img1, img2, img3, img4 } = route.params;
@@ -51,7 +48,7 @@ const ProductScreen = ({ route }) => {
         };
 
         return (
-            <TouchableOpacity 
+        <TouchableOpacity 
             onPress={handleBackPress}
             style={{
                 position: 'absolute',
