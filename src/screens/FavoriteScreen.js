@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Center, Box } from "@gluestack-ui/themed";
+import { Box } from "@gluestack-ui/themed";
 import { FlatList } from "react-native";
 import { ScrollView } from "@gluestack-ui/themed";
 import ProductDetail from '../components/ProductDetail';

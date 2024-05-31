@@ -1,11 +1,11 @@
 import React from "react";
 import { FlatList } from "react-native";
-import { Box, Text } from "@gluestack-ui/themed";
+import { Box } from "@gluestack-ui/themed";
 
 import ProductDetail from './ProductDetail';
 
 const Productlist = ({list}) => {
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }) => ( 
     <Box marginRight={40} marginBottom={20}>
       < ProductDetail product={item} />
     </Box>
