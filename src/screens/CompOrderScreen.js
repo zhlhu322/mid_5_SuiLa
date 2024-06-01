@@ -8,7 +8,7 @@ import OrderData from '../json/OrderData.json';
 
 const Orderlist = ({list}) => {
   const renderItem = ({ item }) => ( 
-    <Box marginRight={40} marginBottom={20}>
+    <Box marginRight={25} marginBottom={20}>
       < OrderDetail order={item} />
     </Box>
   )
@@ -33,7 +33,7 @@ const OrderDetail = ({ order }) => {
             alt="productImage"
             source={{uri: order.image }}
         />
-        <VStack style={{gap:15, width:220}}> 
+        <VStack style={{gap:15, width:230}}> 
           <HStack style={{display:'flex',flexDirection:'row', justifyContent:'space-between'}}>
               <Text style={styles.text}>{order.title}</Text>
               <Text style={{color:'#AE3434'}}>{order.situation}</Text>
@@ -55,7 +55,7 @@ const OrderDetail = ({ order }) => {
 
 const data = [
   { label: '已取消', value: '1' },
-  { label: '已取貨', value: '2' },
+  { label: '已完成', value: '2' },
   { label: '已退貨', value: '3' },
 ];
 
@@ -105,6 +105,7 @@ const CompOrderScreen = () =>{
         activeColor="#F5F7F1"
         itemTextStyle={styles.dpitem}
         onChange={handleDropdownChange}
+        selectedTextStyle={styles.selectedText}
       />
       <Orderlist list={sortedOrder}/>
 
@@ -142,11 +143,12 @@ const styles = StyleSheet.create({
     fontSize:16
   },
   dropdown:{
+    alignSelf:"flex-end",
     backgroundColor:'white',
     width:110,
     height:30,
     marginTop:10,
-    marginLeft:260,
+    marginRight:30,
     borderRadius:10
   },
   placeholder:{
@@ -156,6 +158,9 @@ const styles = StyleSheet.create({
   },
   dpitem:{
     fontSize:14
+  },
+  selectedText:{
+    marginLeft:10
   }
 
 });

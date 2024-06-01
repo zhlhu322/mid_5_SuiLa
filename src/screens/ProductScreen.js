@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLike, setLike, toggleLike } from '../redux/likeSlice';
-
+import { addToCart } from '../redux/cartSlice';
 import { selectFavorites, addFavorite, removeFavorite } from '../redux/favoritesSlice';
 
 const ProductScreen = ({ route }) => {
@@ -20,22 +20,29 @@ const ProductScreen = ({ route }) => {
     const dispatch = useDispatch();
     const favorites = useSelector(selectFavorites);
     const [cart_modalVisible, setModalVisible] = useState(false); //控制購物車選單是否出現
-    const [selectedSize, setSelectedSize] = useState(''); //儲存選擇的尺寸
-    const [quantity, setQuantity] = useState(1); //儲存選擇的數量
+    const [selectedSize, setSelectedSize] = useState('S'); //儲存選擇的尺寸
+    const [quantity, setQuantity] = useState('1'); //儲存選擇的數量
     const cart_toggleModal = () => {
         setModalVisible(!cart_modalVisible); //切換購物車選單的顯示及隱藏
+    };
+    const navigation = useNavigation();
+
+    const navigateToCart = () => {
+        cart_toggleModal();
+        navigation.navigate('Cart');
     };
 
     const addToCartHandler = () => {
         const product = {
-            title: route.params.title,
-            image: route.params.image,
-            price: route.params.price,
-            size: selectedSize, 
-            quantity: quantity    
+            id: new Date().getTime().toString(), 
+            title,
+            image,
+            price,
+            size: selectedSize,
+            quantity
         };
         dispatch(addToCart(product));
-        cart_toggleModal(); 
+        navigateToCart();
     };
 
     
@@ -70,12 +77,7 @@ const ProductScreen = ({ route }) => {
             dispatch(addFavorite({ title,image,price,img1,img2,img3,img4,size_chart }));
         }
     };
-    const addToCart = (product) => {
-        return {
-            type: 'ADD_TO_CART',
-            payload: product
-        };
-    };
+    
 
     return (
         <Center bgColor="white" height="100%">
@@ -121,47 +123,59 @@ const ProductScreen = ({ route }) => {
                     
 
                     
-                    <Modal //以下是購物選單框框
+                    <Modal 
                         animationType="slide"
                         transparent={true}
                         visible={cart_modalVisible}
                         onRequestClose={cart_toggleModal}
                     >
-                        <Center flex={1} justifyContent="flex-end">
-                            <View style={{
-                                width:'100%',
-                                backgroundColor: '#FFF',
-                                borderTopLeftRadius: 20,
-                                borderTopRightRadius: 20,
-                                padding: 20,
-                                paddingBottom: 40,
-                            }}>
-                                <Text>選擇尺寸</Text>
-                                <Picker
-                                    selectedValue={selectedSize}
-                                    onValueChange={(itemValue, itemIndex) => setSelectedSize(itemValue)}
-                                    style={{ marginTop: 10 }}
-                                >
-                                    <Picker.Item label="S" value="S" />
-                                    <Picker.Item label="M" value="M" />
-                                    <Picker.Item label="L" value="L" />
-                                </Picker>
-                                <Text>選擇數量</Text>
-                                <TextInput
-                                    value={quantity.toString()}
-                                    onChangeText={text => setQuantity(parseInt(text) || 0)}
-                                    keyboardType="numeric"
-                                    style={{ borderWidth: 1, borderColor: '#ccc', borderRadius: 5, padding: 10, marginTop: 10 }}
-                                />
-                                <Pressable onPress={addToCartHandler} style={{ marginTop: 20 }}>
-                                    <Text style={{ color: '#007BFF' }}>加入</Text>
-                                </Pressable>
-                            </View>
-                        </Center>
+                        <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+                            <Center flex={1} justifyContent="flex-end">
+                                <View style={{
+                                    width:'100%',
+                                    backgroundColor: '#FFF',
+                                    borderTopLeftRadius: 20,
+                                    borderTopRightRadius: 20,
+                                    padding: 20,
+                                    paddingBottom: 40,
+                                }}>
+                                    <TouchableOpacity 
+                                        onPress={cart_toggleModal}
+                                        style={{ position: 'absolute', top: 10, right: 10 }}
+                                    >
+                                        <MaterialCommunityIcons name="close" size={24} color="black" />
+                                    </TouchableOpacity>
+                                    <Text>選擇尺寸</Text>
+                                    <Picker
+                                        selectedValue={selectedSize}
+                                        onValueChange={(itemValue, itemIndex) => setSelectedSize(itemValue)}
+                                        style={{ marginTop: 10 }}
+                                    >
+                                        <Picker.Item label="S" value="S" />
+                                        <Picker.Item label="M" value="M" />
+                                        <Picker.Item label="L" value="L" />
+                                    </Picker>
+                                    <Text>選擇數量</Text>
+                                    <Picker
+                                        selectedValue={quantity}
+                                        onValueChange={(itemValue, itemIndex) => setQuantity(itemValue)}
+                                        style={{ marginTop: 10 }}
+                                    >
+                                        <Picker.Item label="1" value="1" />
+                                        <Picker.Item label="2" value="2" />
+                                        <Picker.Item label="3" value="3" />
+                                        <Picker.Item label="4" value="4" />
+                                        <Picker.Item label="5" value="5" />
+                                    </Picker>
+                                    <Pressable onPress={addToCartHandler} style={{ marginTop: 20 }}>
+                                        <Text style={{ color: '#007BFF' }}>加入</Text>
+                                    </Pressable>
+                                </View>
+                            </Center>
+                        </View>
                     </Modal>
-
                     
-                    <HStack justifyContent="center" mt={20} spacing={0} //以下是加入購物車跟直接購買的按鈕
+                    <HStack justifyContent="center" mt={20} spacing={0} 
                         style={{
                             shadowColor: "#C8C8A9",
                             shadowOffset: {
@@ -176,7 +190,7 @@ const ProductScreen = ({ route }) => {
                             w={150}
                             h={36}
                             backgroundColor="#FEFFE6"
-                            onPress={addToCartHandler}
+                            onPress={cart_toggleModal}
                             style={{
                                 borderTopLeftRadius: 18,
                                 borderBottomLeftRadius: 18,

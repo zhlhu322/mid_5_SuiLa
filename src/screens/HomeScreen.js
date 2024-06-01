@@ -54,6 +54,7 @@ const HomeScreen = () => {
         activeColor="#F5F7F1"
         itemTextStyle={styles.item}
         onChange={handleDropdownChange}
+        selectedTextStyle={styles.selectedText}
       />
       <Productlist list={sortedProductData}/>
     </ScrollView>
@@ -63,11 +64,12 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   dropdown:{
+    alignSelf:"flex-end",
     backgroundColor:'white',
     width:110,
     height:30,
     marginTop:10,
-    marginLeft:25,
+    marginRight:25,
     borderRadius:10
   },
   placeholder:{
@@ -81,6 +83,9 @@ const styles = StyleSheet.create({
   },
   item:{
     fontSize:14
+  },
+  selectedText:{
+    marginLeft:10
   }
 });
 

@@ -1,16 +1,41 @@
-import React from 'react';
-import { Box, Text, Image } from '@gluestack-ui/themed';
+import React, { useState } from 'react';
+import { Box, Text, Image, Pressable } from '@gluestack-ui/themed';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Center, ScrollView, Pressable, HStack } from "@gluestack-ui/themed";
+import { HStack } from "@gluestack-ui/themed";
 import { useNavigation } from '@react-navigation/native';
 import { Linking } from 'react-native';
-
+import * as ImagePicker from 'expo-image-picker';
 
 
 
 const PersonalinfoScreen = () => {
   const { navigate } = useNavigation();
+  const [selectedImage, setSelectedImage] = useState(null);
+  async function openImagePickerAsync() {
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
+    if (permissionResult.granted === false) {
+      alert('需要許可才能訪問您的相簿！');
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!pickerResult.canceled) {
+      console.log("選擇的圖片 URI:", pickerResult.assets[0].uri);
+      setSelectedImage(pickerResult.assets[0].uri); 
+    }
+  }
+
+  function removeSelectedImage() {
+    setSelectedImage(null);
+  }
+       
   return (
     <Box direction="column">
       <Box
@@ -20,16 +45,31 @@ const PersonalinfoScreen = () => {
         alignItems="center"
       >
         <Box h={200} justifyContent="space-around" flexDirection="row" alignItems="center">
-          <Image
-            h={110}
-            w={110}
-            borderRadius={999}
-            mt={60}
-            borderWidth={1.5}
-            borderColor='#C8C8A9'
-            source={"https://i.pinimg.com/564x/b9/0b/7a/b90b7a981f6cbb6df12dabe9c962faff.jpg"}
-            alt='personalImage'
-          />
+        <Pressable onPress={openImagePickerAsync}>
+            {selectedImage ? (
+              <Image
+                h={110}
+                w={110}
+                borderRadius={999}
+                mt={60}
+                borderWidth={1.5}
+                borderColor='#C8C8A9'
+                source={{ uri: selectedImage }}  
+                alt='personalImage'
+              />
+            ) : (
+              <Image
+                h={110}
+                w={110}
+                borderRadius={999}
+                mt={60}
+                borderWidth={1.5}
+                borderColor='#C8C8A9'
+                source={{ uri: "https://github.com/zhlhu322/mid_5_SuiLa/blob/master/assets/logo_SuiLa.png?raw=true" }}  
+                alt='personalImage'
+              />
+            )}
+          </Pressable>
           <Text fontWeight='400'
             color='black'
             fontSize={23}
@@ -92,7 +132,7 @@ const PersonalinfoScreen = () => {
             h={80}
             m={10}
             backgroundColor="#FEFFE6"
-            onPress={() => Linking.openURL()}
+            onPress={() => navigate('CouponScreen')}
             style={{
               borderRadius: 18,
               shadowColor: "#C8C8A9",
@@ -178,7 +218,7 @@ const PersonalinfoScreen = () => {
             h={80}
             m={10}
             backgroundColor="#FEFFE6"
-            onPress={() => Linking.openURL()}
+            onPress={() => navigate('TOSScreen')}
             style={{
               borderRadius: 18,
               shadowColor: "#C8C8A9",

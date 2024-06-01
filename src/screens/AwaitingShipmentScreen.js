@@ -9,7 +9,7 @@ import OrderData from '../json/OrderData(AS).json';
 const Orderlist = () => {
 
   const renderItem = ({ item }) => ( 
-    <Box marginRight={40} marginBottom={20}>
+    <Box marginRight={25} marginBottom={20}>
       < OrderDetail order={item} />
     </Box>
   )
@@ -35,7 +35,7 @@ const OrderDetail = ({ order }) => {
               alt="productImage"
               source={{uri:order.image}}
             />
-            <VStack style={{gap:15, width:220, color:'black'}}> 
+            <VStack style={{gap:15, width:230, color:'black'}}> 
               <Text style={styles.text}>{order.title}</Text>
               <HStack style={{display:'flex',flexDirection:'row', justifyContent:'space-between'}}>
                 <Text style={styles.text}>{order.size}</Text>

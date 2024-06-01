@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "index":1,
+            "code": "{Hi_SuiLa}",
+            "title":"SuiLa~ 歡迎您(´▽`ʃ♡ƪ)",
+            "discount": 0.9,
+            "desc":"初次使用SuiLa的用戶可使用",
+            "date":"使用期限：2024/7/5 | 優惠：單件即享九折"
+        },
+        {
+            "index":2,
+            "code": "{SuiLa_HBD}",
+            "title":"SuiLa生日快樂!( ӵ )",
+            "discount": 0.75,
+            "desc":"謝謝您的支持，SuiLa迎來成立後的第一個生日啦~",
+            "date":"使用期限：2024/12/31 | 優惠：兩件(含)以上即享75折"
+        }
+    ]
+}

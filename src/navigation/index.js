@@ -16,7 +16,9 @@ import HomeHeaderIcon from '../components/HomeHeaderIcon';
 import AwaitingShipmentScreen from '../screens/AwaitingShipmentScreen';
 import AwaitingPickupScreen from '../screens/AwaitingPickupScreen';
 import CompOrderScreen from '../screens/CompOrderScreen';
-
+import CartScreen from '../screens/CartScreen';
+import CouponScreen from '../screens/CouponScreen';
+import TOSScreen from '../screens/TOSScreen';
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -199,6 +201,24 @@ const HomeStack = ({ navigation }) => {
           }}
        />
        <Stack.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          title: '購物車',
+          headerTitleStyle:{
+            fontWeight:'500',
+            fontSize:20,
+            color:'#6A6A36'
+          },
+          headerLeft: () => (
+            <Text></Text>
+          ),
+          headerRight: () => (
+            <Text></Text>
+          ),
+        }}
+      />
+       <Stack.Screen
         name="camera"
         component={CameraScreen}
         options={{
@@ -239,6 +259,20 @@ const PersonalinfoStack = ({ navigation }) => {
       <Stack.Screen
         name="OrderScreen"
         component={PTopTabs}
+        options={{
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="CouponScreen"
+        component={CouponScreen}
+        options={{
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="TOSScreen"
+        component={TOSScreen}
         options={{
           title: '',
         }}
@@ -301,6 +335,7 @@ const PTopTabs = () => {
     </TopTab.Navigator>
   );
 }
+
 
 
 export default Navigation;

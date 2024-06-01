@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import likeReducer from './likeSlice';
+import cartReducer from "./cartSlice";
 import favoritesReducer from './favoritesSlice';
 
 //persist
@@ -14,7 +15,8 @@ const persistConfig = {
 const store = configureStore({
     reducer:{
         like:persistReducer(persistConfig,likeReducer),
-        favorites: persistReducer(persistConfig,favoritesReducer)
+        favorites: persistReducer(persistConfig,favoritesReducer),
+        cart: persistReducer(persistConfig,cartReducer)
     },
     devTools: process.env.NODE_ENV !== 'production',
     middleware:(getDefaultMiddleware)=> 

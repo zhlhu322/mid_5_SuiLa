@@ -3,12 +3,16 @@ import { HStack } from '@gluestack-ui/themed';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Animated,TextInput } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+
+
 const HomeHeaderIcon = () => {
     const [showSearch, setShowSearch] = useState(false); // 是否顯示搜尋欄
     const [searchText, setSearchText] = useState('');    // 用戶輸入的內容
     const [HstackWidth, setHStackWidth] = useState(70);  // 設定header上的icon組合(magnify,cart)的寬度
     const animatedValue = React.useRef(new Animated.Value(0)).current;
-  
+    const { navigate } = useNavigation();
+
     const handlePress = () => {
       setShowSearch(true);     //顯示搜尋欄
       Animated.timing(animatedValue, {
@@ -50,7 +54,7 @@ const HomeHeaderIcon = () => {
           // 當 showSearch 為 false 時，渲染 magnify 按鈕
           <MaterialCommunityIcons name="magnify" color='#6A6A36' size={26} onPress={handlePress} />
         )}
-        <MaterialCommunityIcons name="cart" color='#6A6A36' size={26} onPress={() => alert('You have touched Cart')} />
+        <MaterialCommunityIcons name="cart" color='#6A6A36' size={26} onPress={() => navigate('Cart')} />
       </HStack>
     );
   };
