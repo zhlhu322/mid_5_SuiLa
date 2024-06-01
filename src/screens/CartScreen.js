@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Box, Text, HStack, VStack, Image } from "@gluestack-ui/themed";
+import { ScrollView, Box, Text, HStack, VStack, Image, View} from "@gluestack-ui/themed";
 import { FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
 import { Center } from "@gluestack-ui/themed";
-import { removeFromCart, updateCartItemSize } from '../redux/cartSlice';
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dropdown } from 'react-native-element-dropdown';
+import Checkbox from 'expo-checkbox';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart, updateCartItemSize } from '../redux/cartSlice';
+import { selecttoPay, checktoPay, removePay } from '../redux/paySlice';
+
 
 const data = [
     { label: 'S', value: 'S' },
@@ -14,7 +18,7 @@ const data = [
     { label: 'L', value: 'L' },
 ];
 
-const RenderDropdown = ({item}) => {
+const RenderDropdown = ({ item }) => {
     const dispatch = useDispatch();
     const [value, setValue] = useState(item.size);
 
@@ -47,6 +51,11 @@ const RenderDropdown = ({item}) => {
 const CartScreen = () => {
     const cartItems = useSelector((state) => state.cart.items);
     const dispatch = useDispatch();
+    const [checkedItems, setCheckedItems] = useState([]);
+
+    useEffect(() => {
+        setCheckedItems(new Array(cartItems.length).fill(false));
+    }, [cartItems.length]);
 
     const CustomBackButton = () => {
         const navigation = useNavigation();
@@ -59,7 +68,7 @@ const CartScreen = () => {
             <TouchableOpacity
                 onPress={handleBackPress}
                 style={{
-                    margin: 10,
+                    marginBottom: 10,
                     position: 'relative',
                     top: 10,
                     left: 10,
@@ -75,19 +84,30 @@ const CartScreen = () => {
         dispatch(removeFromCart({ id }));
     };
 
-    const renderItem = ({ item }) => (
-        <Box style={styles.box}>
+    const handleCheckboxChange = (index) => {
+        const newCheckedItems = [...checkedItems];
+        newCheckedItems[index] = !newCheckedItems[index];
+        setCheckedItems(newCheckedItems);
+    };
 
+    const renderItem = ({ item, index }) => (
+        <Box style={styles.box}>
+            <Checkbox
+                style={styles.checkbox}
+                value={checkedItems[index]}
+                onValueChange={() => handleCheckboxChange(index)}
+                color={checkedItems[index] ? '#6A6A36' : undefined}
+            />
             <Image
-                style={{ width: 100, height: 100, marginTop: 20, marginLeft: 15 }}
+                style={styles.image}
                 source={{ uri: item.image }}
             />
-            <VStack style={{ marginLeft: 10, paddingTop: 20 }}>
-                <Box style={{ justifyContent: 'space-between', width: 200 }}>
+            <VStack style={{ marginLeft: 10, paddingTop: 20, marginBottom: 20 }}>
+                <Box style={{ justifyContent: 'space-between', width: 180 }}>
                     <Text style={{ fontSize: 16, color: 'black', marginBottom: 10 }}>{item.title}</Text>
                 </Box>
-                <RenderDropdown item={item}/>
-                <HStack style={{ justifyContent: 'space-between', marginTop: 25 }}>
+                <RenderDropdown item={item} />
+                <HStack style={{ justifyContent: 'space-between', marginTop: 23 }}>
                     <Text style={{ fontSize: 16 }}>${item.price}</Text>
                     <Text style={{ fontSize: 16 }}>數量:{item.quantity}</Text>
                 </HStack>
@@ -103,16 +123,27 @@ const CartScreen = () => {
     );
 
     return (
-        <ScrollView bgColor="#F5F7F1" height="100%" width="100%">
-            <CustomBackButton />
-            <Center>
-                <FlatList
-                    data={cartItems}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                />
-            </Center>
-        </ScrollView>
+        <View style={{flex:1}}>
+            <ScrollView bgColor="#F5F7F1" height="100%" width="100%">
+                <CustomBackButton />
+                <Center>
+                    <FlatList
+                        data={cartItems}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                    />
+
+                </Center>
+
+            </ScrollView>
+            <Box style={styles.buttonBox}>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={{ fontSize: 24, color: "white" }}>結帳</Text>
+                </TouchableOpacity>
+            </Box>
+            
+        </View>
+
     );
 
 };
@@ -120,14 +151,14 @@ const CartScreen = () => {
 const styles = StyleSheet.create({
     dropdown: {
         backgroundColor: 'white',
-        width: 80,
-        height: 30,
+        width: 50,
+        height: 25,
         borderRadius: 5
     },
     placeholder: {
-        fontSize: 16,
+        fontSize: 14,
         color: 'black',
-        paddingLeft: 10
+        paddingLeft: 5
     },
     container: {
         borderRadius: 10,
@@ -136,15 +167,14 @@ const styles = StyleSheet.create({
     item: {
         fontSize: 14,
     },
-    selectedText:{
-        marginLeft:5
+    selectedText: {
+        marginLeft: 5
     },
     box: {
         width: 360,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         margin: 15,
-        paddingBottom: 20,
         backgroundColor: '#D8D8C7',
         borderRadius: 5,
         borderWidth: 1,
@@ -154,8 +184,38 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 5,
         elevation: 3,
+    },
+    image: {
+        width: 100,
+        height: 100,
+        marginTop: 20,
+        marginLeft: 10,
+        borderRadius: 8,
+        alignSelf: 'center',
+        marginBottom: 20
+    },
+    checkbox: {
+        marginLeft: 10,
+        backgroundColor: "#F5F7F1",
+        borderColor: "#F5F7F1",
+        alignSelf: 'center'
+    },
+    button: {
+        position: 'absolute',
+        width: 150,
+        height: 50,
+        backgroundColor: "#6A6A36",
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom:20
+    },
+    buttonBox:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
     }
-
 });
 
 export default CartScreen;

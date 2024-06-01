@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 import { Linking, Image, Modal, View, TextInput } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Center, ScrollView, Box, Text, Pressable, HStack, VStack } from "@gluestack-ui/themed";
@@ -7,7 +7,6 @@ import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectLike, setLike, toggleLike } from '../redux/likeSlice';
 import { addToCart } from '../redux/cartSlice';
 import { selectFavorites, addFavorite, removeFavorite } from '../redux/favoritesSlice';
 
@@ -15,8 +14,6 @@ const ProductScreen = ({ route }) => {
     const { title, image, price, size_chart, img1, img2, img3, img4 } = route.params;
     const { navigate } = useNavigation();
 
-
-    const likeicon = useSelector(selectLike);  //取得state
     const dispatch = useDispatch();
     const favorites = useSelector(selectFavorites);
     const [cart_modalVisible, setModalVisible] = useState(false); //控制購物車選單是否出現
@@ -34,7 +31,7 @@ const ProductScreen = ({ route }) => {
 
     const addToCartHandler = () => {
         const product = {
-            id: new Date().getTime().toString(), 
+            id: new Date().getTime().toString(),
             title,
             image,
             price,
@@ -45,7 +42,6 @@ const ProductScreen = ({ route }) => {
         navigateToCart();
     };
 
-    
 
     const CustomBackButton = () => {
         const navigation = useNavigation();
@@ -55,17 +51,17 @@ const ProductScreen = ({ route }) => {
         };
 
         return (
-        <TouchableOpacity 
-            onPress={handleBackPress}
-            style={{
-                position: 'absolute',
-                top: 10,            
-                left: 10,           
-                zIndex: 1            
-            }}
-        >
-            <MaterialCommunityIcons name="chevron-left" size={30} color="#000" />
-        </TouchableOpacity>
+            <TouchableOpacity
+                onPress={handleBackPress}
+                style={{
+                    position: 'absolute',
+                    top: 10,
+                    left: 10,
+                    zIndex: 1
+                }}
+            >
+                <MaterialCommunityIcons name="chevron-left" size={30} color="#000" />
+            </TouchableOpacity>
         );
     };
 
@@ -74,23 +70,22 @@ const ProductScreen = ({ route }) => {
         if (isFavorite) {
             dispatch(removeFavorite({ title }));
         } else {
-            dispatch(addFavorite({ title,image,price,img1,img2,img3,img4,size_chart }));
+            dispatch(addFavorite({ title, image, price, img1, img2, img3, img4, size_chart }));
         }
     };
-    
+
 
     return (
         <Center bgColor="white" height="100%">
-            <CustomBackButton/>
+            <CustomBackButton />
             <ScrollView bgColor='#F5F7F1' w='100%' h='100%'>
-            
+
                 <Center>
                     <Image
                         style={{ height: 300, width: 300, marginTop: 20 }}
                         source={{ uri: image }}
 
                     />
-
 
                     <HStack justifyContent="space-between" alignItems="center">
                         <Box mt={5} width="70%" >
@@ -120,10 +115,10 @@ const ProductScreen = ({ route }) => {
                             />
                         </Pressable>
                     </HStack>
-                    
 
-                    
-                    <Modal 
+
+
+                    <Modal
                         animationType="slide"
                         transparent={true}
                         visible={cart_modalVisible}
@@ -132,14 +127,14 @@ const ProductScreen = ({ route }) => {
                         <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
                             <Center flex={1} justifyContent="flex-end">
                                 <View style={{
-                                    width:'100%',
+                                    width: '100%',
                                     backgroundColor: '#FFF',
                                     borderTopLeftRadius: 20,
                                     borderTopRightRadius: 20,
                                     padding: 20,
                                     paddingBottom: 40,
                                 }}>
-                                    <TouchableOpacity 
+                                    <TouchableOpacity
                                         onPress={cart_toggleModal}
                                         style={{ position: 'absolute', top: 10, right: 10 }}
                                     >
@@ -174,8 +169,8 @@ const ProductScreen = ({ route }) => {
                             </Center>
                         </View>
                     </Modal>
-                    
-                    <HStack justifyContent="center" mt={20} spacing={0} 
+
+                    <HStack justifyContent="center" mt={20} spacing={0}
                         style={{
                             shadowColor: "#C8C8A9",
                             shadowOffset: {
@@ -233,7 +228,7 @@ const ProductScreen = ({ route }) => {
                         </Pressable>
                     </HStack>
 
-                    
+
                     <Box mt={5} width="75%">
                         <Pressable onPress={() => navigate('camera')}>
                             <Text
@@ -246,7 +241,7 @@ const ProductScreen = ({ route }) => {
                                 fontWeight='400'
                             >線上試衣間</Text>
                         </Pressable>
-                        
+
                         <Text
                             mt={15}
                             mb={-5}
@@ -258,10 +253,10 @@ const ProductScreen = ({ route }) => {
                         >尺寸表</Text>
                     </Box>
                     <Image
-                        style={{ height: 130, width: 300, marginTop: 20,opacity:0.8 }}
+                        style={{ height: 130, width: 300, marginTop: 20, opacity: 0.8 }}
                         source={{ uri: size_chart }}
                     />
-                    
+
                     <Box mt={5} width="75%">
                         <Text
                             mt={15}

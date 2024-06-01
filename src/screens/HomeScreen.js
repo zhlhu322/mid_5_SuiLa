@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   dropdown:{
     alignSelf:"flex-end",
     backgroundColor:'white',
-    width:110,
+    width:120,
     height:30,
     marginTop:10,
     marginRight:25,

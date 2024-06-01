@@ -11,6 +11,9 @@ import * as ImagePicker from 'expo-image-picker';
 const PersonalinfoScreen = () => {
   const { navigate } = useNavigation();
   const [selectedImage, setSelectedImage] = useState(null);
+  const [infoText, setInfoText] = useState('160 cm / 45 kg');
+  const [iconName, setIconName] = useState('emoticon-happy-outline');
+
   async function openImagePickerAsync() {
     let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -34,6 +37,15 @@ const PersonalinfoScreen = () => {
 
   function removeSelectedImage() {
     setSelectedImage(null);
+  }
+  function handleIconPress() {
+    if (iconName === 'emoticon-happy-outline') {
+      setInfoText('*** cm / *** kg');
+      setIconName('emoticon-cool-outline');
+    } else {
+      setInfoText('160 cm / 45 kg');
+      setIconName('emoticon-happy-outline');
+    }
   }
        
   return (
@@ -65,7 +77,7 @@ const PersonalinfoScreen = () => {
                 mt={60}
                 borderWidth={1.5}
                 borderColor='#C8C8A9'
-                source={{ uri: "https://github.com/zhlhu322/mid_5_SuiLa/blob/master/assets/logo_SuiLa.png?raw=true" }}  
+                source={{ uri: "https://github.com/zhlhu322/mid_5_SuiLa/blob/master/assets/shot.jpg?raw=true" }}  
                 alt='personalImage'
               />
             )}
@@ -85,9 +97,8 @@ const PersonalinfoScreen = () => {
             fontSize={16}
             lineHeight={35}
             marginRight={8}
-          >160 cm / 45 kg
-          </Text>
-          <MaterialCommunityIcons name="eye-outline" size={20} color='#6A6A36' />
+          >{infoText}</Text>
+          <MaterialCommunityIcons name={iconName} size={20} color='#6A6A36' onPress={handleIconPress} />
         </HStack>
       </Box>
       <Box
@@ -160,7 +171,7 @@ const PersonalinfoScreen = () => {
             h={80}
             m={10}
             backgroundColor="#FEFFE6"
-            onPress={() => Linking.openURL()}
+            onPress={() => navigate('ProfileScreen')}
             style={{
               borderRadius: 18,
               shadowColor: "#C8C8A9",

@@ -19,6 +19,7 @@ import CompOrderScreen from '../screens/CompOrderScreen';
 import CartScreen from '../screens/CartScreen';
 import CouponScreen from '../screens/CouponScreen';
 import TOSScreen from '../screens/TOSScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -266,6 +267,13 @@ const PersonalinfoStack = ({ navigation }) => {
       <Stack.Screen
         name="CouponScreen"
         component={CouponScreen}
+        options={{
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
         options={{
           title: '',
         }}
