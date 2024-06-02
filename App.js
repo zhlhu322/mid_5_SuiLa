@@ -5,17 +5,25 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import Navigation from "./src/navigation";
 import { GluestackUIProvider, ScrollView } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
-
+import 'react-native-gesture-handler';
+import 'react-native-reanimated';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 import store from "./src/redux/store";
+import ProfileScreen from './src/screens/ProfileScreen';
+import PersonalinfoScreen from './src/screens/PersonalinfoScreen';
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
+      <QueryClientProvider client={queryClient}> 
         <GluestackUIProvider config={config}>
           <Navigation />
         </GluestackUIProvider>
+        </QueryClientProvider>
       </SafeAreaProvider>
     </Provider>
 

@@ -17,7 +17,7 @@ const HomeHeaderIcon = () => {
       setShowSearch(true);     //顯示搜尋欄
       Animated.timing(animatedValue, {
         toValue: 1,
-        duration: 400,
+        duration: 900,
         useNativeDriver: false,
       }).start();
       setHStackWidth(170);     //修改HStack的數值讓搜尋欄不會擠到購物車的button

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, Box, Text, HStack, VStack, Image, View} from "@gluestack-ui/themed";
-import { FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { FlatList, TouchableOpacity, StyleSheet , LayoutAnimation } from 'react-native';
 import { Center } from "@gluestack-ui/themed";
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,7 +9,7 @@ import Checkbox from 'expo-checkbox';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, updateCartItemSize } from '../redux/cartSlice';
-import { selecttoPay, checktoPay, removePay } from '../redux/paySlice';
+import { setSelectedItems } from '../redux/paySlice';
 
 
 const data = [
@@ -51,11 +51,17 @@ const RenderDropdown = ({ item }) => {
 const CartScreen = () => {
     const cartItems = useSelector((state) => state.cart.items);
     const dispatch = useDispatch();
-    const [checkedItems, setCheckedItems] = useState([]);
+    const [checkedItems, setCheckedItems] = useState({});
+    const { navigate } = useNavigation();
+    const navigation = useNavigation();
 
-    useEffect(() => {
-        setCheckedItems(new Array(cartItems.length).fill(false));
-    }, [cartItems.length]);
+    useEffect(() => {  //初始化每個商品被選中的狀態為flase
+        const initialCheckedState = {};
+        cartItems.forEach(item => {
+            initialCheckedState[item.id] = false;
+        });
+        setCheckedItems(initialCheckedState);
+    }, [cartItems]);
 
     const CustomBackButton = () => {
         const navigation = useNavigation();
@@ -84,23 +90,34 @@ const CartScreen = () => {
         dispatch(removeFromCart({ id }));
     };
 
-    const handleCheckboxChange = (index) => {
-        const newCheckedItems = [...checkedItems];
-        newCheckedItems[index] = !newCheckedItems[index];
-        setCheckedItems(newCheckedItems);
+    const handleCheckboxChange = (id) => {
+        setCheckedItems(prevState => ({
+            ...prevState,
+            [id]: !prevState[id]
+        }));
     };
 
-    const renderItem = ({ item, index }) => (
+    const isAnyItemChecked = Object.values(checkedItems).some(value => value);
+
+    const handleCheckout = () => {
+        const selectedItems = cartItems.filter(item => checkedItems[item.id]);
+        dispatch(setSelectedItems(selectedItems));
+        navigation.navigate('checkout');
+    };
+
+    const renderItem = ({ item }) => (
+        
         <Box style={styles.box}>
             <Checkbox
                 style={styles.checkbox}
-                value={checkedItems[index]}
-                onValueChange={() => handleCheckboxChange(index)}
-                color={checkedItems[index] ? '#6A6A36' : undefined}
+                value={checkedItems[item.id]}
+                onValueChange={() => handleCheckboxChange(item.id)}
+                color={checkedItems[item.id] ? '#6A6A36' : undefined}
             />
             <Image
                 style={styles.image}
                 source={{ uri: item.image }}
+                alt="productImage"
             />
             <VStack style={{ marginLeft: 10, paddingTop: 20, marginBottom: 20 }}>
                 <Box style={{ justifyContent: 'space-between', width: 180 }}>
@@ -118,8 +135,10 @@ const CartScreen = () => {
                     <MaterialCommunityIcons name="close" size={20} color="black" />
                 </TouchableOpacity>
             </HStack>
-
+           
         </Box>
+        
+
     );
 
     return (
@@ -130,18 +149,19 @@ const CartScreen = () => {
                     <FlatList
                         data={cartItems}
                         renderItem={renderItem}
-                        keyExtractor={item => item.id}
+                        keyExtractor={item => item.id.toString()}
                     />
-
                 </Center>
-
             </ScrollView>
-            <Box style={styles.buttonBox}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={{ fontSize: 24, color: "white" }}>結帳</Text>
-                </TouchableOpacity>
-            </Box>
-            
+
+            { isAnyItemChecked && (   //結帳按鈕
+                <Box style={styles.buttonBox}>  
+                    <TouchableOpacity style={styles.button} onPress={handleCheckout}>
+                        <Text style={{ fontSize: 24, color: "white" }}>結帳</Text>
+                    </TouchableOpacity>
+                </Box>    
+            )}
+              
         </View>
 
     );
@@ -205,10 +225,15 @@ const styles = StyleSheet.create({
         width: 150,
         height: 50,
         backgroundColor: "#6A6A36",
-        borderRadius: 10,
+        borderRadius: 25,
         alignItems: 'center',
         justifyContent: 'center',
-        bottom:20
+        bottom:20,
+        shadowColor: '#D8D8C7',
+        shadowOffset: { width: 0, height: 7 },
+        shadowOpacity: 0.8,
+        shadowRadius: 15,
+        
     },
     buttonBox:{
         display:'flex',

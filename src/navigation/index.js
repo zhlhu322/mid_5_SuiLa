@@ -20,6 +20,9 @@ import CartScreen from '../screens/CartScreen';
 import CouponScreen from '../screens/CouponScreen';
 import TOSScreen from '../screens/TOSScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import ContactScreen from '../screens/ContactScreen';
+import CheckOutScreen from '../screens/CheckOutScreen';
+import DisplaySettingScreen from '../screens/DisplaySettingScreen';
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -45,8 +48,8 @@ const TopTabs = () => {
           height: 50,
           borderRightWidth: 1,
           borderRightColor: '#C8C8A9',
-          borderBottomColor:'#BEBEB0',
-          borderBottomWidth:0.8,
+          borderBottomColor: '#BEBEB0',
+          borderBottomWidth: 0.8,
         },
         tabBarInactiveTintColor: '#F5F7F1',
         tabBarActiveTintColor: '#F5F7F1',
@@ -199,17 +202,17 @@ const HomeStack = ({ navigation }) => {
         component={ProductScreen}
         options={{
           title: '',
-          }}
-       />
-       <Stack.Screen
+        }}
+      />
+      <Stack.Screen
         name="Cart"
         component={CartScreen}
         options={{
           title: '購物車',
-          headerTitleStyle:{
-            fontWeight:'500',
-            fontSize:20,
-            color:'#6A6A36'
+          headerTitleStyle: {
+            fontWeight: '500',
+            fontSize: 20,
+            color: '#6A6A36'
           },
           headerLeft: () => (
             <Text></Text>
@@ -219,13 +222,20 @@ const HomeStack = ({ navigation }) => {
           ),
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="camera"
         component={CameraScreen}
         options={{
           title: '',
-          }}
-       />
+        }}
+      />
+      <Stack.Screen
+        name="checkout"
+        component={CheckOutScreen}
+        options={{
+          title: '',
+        }}
+      />
     </Stack.Navigator>
 
   );
@@ -285,6 +295,20 @@ const PersonalinfoStack = ({ navigation }) => {
           title: '',
         }}
       />
+      <Stack.Screen
+        name="Contactus"
+        component={ContactScreen}
+        options={{
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="DisplaySettingScreen"
+        component={DisplaySettingScreen}
+        options={{
+          title: '',
+        }}
+      />
     </Stack.Navigator>
 
   );
@@ -302,7 +326,7 @@ const PTopTabs = () => {
           height: 50,
           borderRightWidth: 1,
           borderRightColor: '#C8C8A9',
-          borderBottomColor:'#6A6A36',
+          borderBottomColor: '#6A6A36',
           //borderBottomWidth:0.8,
         },
         tabBarInactiveTintColor: '#6A6A36',
@@ -332,7 +356,7 @@ const PTopTabs = () => {
       />
 
       <TopTab.Screen
-        name="訂單已完成"
+        name="comporder"
         component={CompOrderScreen}
         options={{
           tabBarLabel: "訂單已完成",

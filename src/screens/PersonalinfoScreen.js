@@ -1,49 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Text, Image, Pressable } from '@gluestack-ui/themed';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { HStack } from "@gluestack-ui/themed";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Linking } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { useSelector, useDispatch } from 'react-redux';
+import { setImageUri, removeImageUri } from '../redux/shotSlice';
 
 
 
 const PersonalinfoScreen = () => {
   const { navigate } = useNavigation();
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [infoText, setInfoText] = useState('160 cm / 45 kg');
-  const [iconName, setIconName] = useState('emoticon-happy-outline');
+    const personalinfo = useSelector((state) => state.personalinfo);
+    const { height, weight } = personalinfo;
+    const nickname = personalinfo.nickname || '水水';
+    const selectedImage = useSelector((state) => state.shot.uri);
+    const [infoText, setInfoText] = useState(`${height || '秘密'} cm / ${weight || '秘密'} kg`);
+    const [iconName, setIconName] = useState('emoticon-happy-outline');
 
-  async function openImagePickerAsync() {
-    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert('需要許可才能訪問您的相簿！');
-      return;
+    const dispatch = useDispatch();
+    async function openImagePickerAsync() {
+      let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  
+      if (permissionResult.granted === false) {
+        alert('需要許可才能訪問您的相簿！');
+        return;
+      }
+  
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+  
+      if (!pickerResult.canceled) {
+        console.log("選擇的圖片 URI:", pickerResult.assets[0].uri);
+        dispatch(setImageUri(pickerResult.assets[0].uri));
+      }
     }
+  
+    useEffect(() => {
+      
+    }, [selectedImage]);
 
-    let pickerResult = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
 
-    if (!pickerResult.canceled) {
-      console.log("選擇的圖片 URI:", pickerResult.assets[0].uri);
-      setSelectedImage(pickerResult.assets[0].uri); 
+  
+  useEffect(() => {
+    if (iconName === 'emoticon-happy-outline') {
+        setInfoText(`${height || '秘密'} cm / ${weight || '秘密'} kg`);
+    } else {
+        setInfoText('*** cm / *** kg');
     }
-  }
+}, [height, weight, iconName]);
 
-  function removeSelectedImage() {
-    setSelectedImage(null);
-  }
   function handleIconPress() {
     if (iconName === 'emoticon-happy-outline') {
       setInfoText('*** cm / *** kg');
       setIconName('emoticon-cool-outline');
     } else {
-      setInfoText('160 cm / 45 kg');
+      setInfoText(`${height || '秘密'} cm / ${weight || '秘密'} kg`);
       setIconName('emoticon-happy-outline');
     }
   }
@@ -88,17 +105,18 @@ const PersonalinfoScreen = () => {
             lineHeight={35}
             marginLeft={30}
             marginTop={60}
-          >歡迎，小美
+          >歡迎，{nickname}
           </Text>
         </Box>
         <HStack alignItems='center' marginBottom={10}>
-          <Text fontWeight='400'
+          <Text
+            fontWeight='400'
             color='#6A6A36'
             fontSize={16}
             lineHeight={35}
             marginRight={8}
           >{infoText}</Text>
-          <MaterialCommunityIcons name={iconName} size={20} color='#6A6A36' onPress={handleIconPress} />
+          <MaterialCommunityIcons name={iconName} size={25} color='#6A6A36' onPress={handleIconPress} />
         </HStack>
       </Box>
       <Box
@@ -201,7 +219,7 @@ const PersonalinfoScreen = () => {
             h={80}
             m={10}
             backgroundColor="#FEFFE6"
-            onPress={() => Linking.openURL()}
+            onPress={() => navigate('Contactus')}
             style={{
               borderRadius: 18,
               shadowColor: "#C8C8A9",
@@ -220,7 +238,7 @@ const PersonalinfoScreen = () => {
               fontWeight='500'
               lineHeight={16}
               letterSpacing={1.2}
-            >線上客服</Text>
+            >聯絡我們</Text>
           </Pressable>
           <Pressable
             justifyContent="center"
@@ -257,7 +275,7 @@ const PersonalinfoScreen = () => {
             h={80}
             m={10}
             backgroundColor="#FEFFE6"
-            onPress={() => Linking.openURL()}
+            onPress={() => navigate('DisplaySettingScreen')}
             style={{
               borderRadius: 18,
               shadowColor: "#C8C8A9",

@@ -33,14 +33,18 @@ const CouponDetail = ({ coupon }) => {
     return (
         <Box>
             <Box style={styles.container}>
-                <VStack>
-                    <HStack style={{ justifyContent: "space-between", alignContent: '' }}>
-                        <Text style={styles.couponcode}>{coupon.code}</Text>
-                        <Pressable onPress={copyToClipboard}><Text style={{ fontSize: 14 }}>複製代碼</Text></Pressable>
-                    </HStack>
-                    <Text style={{ fontSize: 16 }}>{coupon.title}</Text>
-                    <Text style={{ fontSize: 14, marginTop: 35 }}>{coupon.desc}</Text>
-                    <Text style={{ fontSize: 14, marginTop: 5 }}>{coupon.date}</Text>
+                <VStack style={{ height:'100%', display:'flex' , flexDirection:'column',justifyContent:'space-between' }}>
+                    <Box>
+                        <HStack style={{ justifyContent: "space-between", alignContent: '' }}>
+                            <Text style={styles.couponcode}>{coupon.code}</Text>
+                            <Pressable onPress={copyToClipboard}><Text style={{ fontSize: 14 }}>複製代碼</Text></Pressable>
+                        </HStack>
+                        <Text style={{ fontSize: 16 }}>{coupon.title}</Text>
+                    </Box>
+                    <Box style={{marginBottom:10}}>
+                        <Text style={{ fontSize: 14, marginTop: 30 }}>{coupon.desc}</Text>
+                        <Text style={{ fontSize: 14, marginTop: 5 }}>{coupon.date}</Text>
+                    </Box>
                 </VStack>
             </Box>
         </Box>
@@ -52,9 +56,9 @@ const CouponScreen = () => {
     return (
         <ScrollView style={styles.scrollview}>
             <Box style={{ alignItems: 'center', marginVertical: 15 }}>
-                <Text style={{ fontSize: 16, color: "#4E4E4E" ,marginBottom:10 }}>在結帳頁面輸入下方優惠券代碼即可套用優惠</Text>
+                <Text style={{ fontSize: 16, color: "#4E4E4E", marginBottom: 10 }}>在結帳頁面輸入下方優惠券代碼即可套用優惠</Text>
             </Box>
-            <Couponlist/>
+            <Couponlist />
         </ScrollView>
 
     );
@@ -74,17 +78,18 @@ const styles = StyleSheet.create({
         borderColor: "#D8D8C7",
         borderRadius: 5,
         marginHorizontal: 15,
-        marginBottom:30,
+        marginBottom: 30,
         width: 360,
-        height: 150,
+        height: 160,
         backgroundColor: "#D8D8C7",
         paddingHorizontal: 20,
         paddingTop: 10,
+        paddingBottom: 5
     },
-    couponcode:{
-        fontSize: 20, 
-        marginBottom: 10, 
-        color: "#6A6A36", 
+    couponcode: {
+        fontSize: 20,
+        marginBottom: 10,
+        color: "#6A6A36",
         fontWeight: 600
     }
 
