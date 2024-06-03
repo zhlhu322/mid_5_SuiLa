@@ -12,6 +12,10 @@ import { Provider } from 'react-redux';
 import store from "./src/redux/store";
 import ProfileScreen from './src/screens/ProfileScreen';
 import PersonalinfoScreen from './src/screens/PersonalinfoScreen';
+import { Appearance, useColorScheme } from 'react-native';
+import { ThemeProvider } from './src/theme/theme-context'; 
+
+
 
 const queryClient = new QueryClient();
 
@@ -20,9 +24,11 @@ const App = () => {
     <Provider store={store}>
       <SafeAreaProvider>
       <QueryClientProvider client={queryClient}> 
-        <GluestackUIProvider config={config}>
-          <Navigation />
-        </GluestackUIProvider>
+       <ThemeProvider>  
+            <GluestackUIProvider config={config}>
+              <Navigation />
+            </GluestackUIProvider>
+          </ThemeProvider>
         </QueryClientProvider>
       </SafeAreaProvider>
     </Provider>

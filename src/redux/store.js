@@ -5,6 +5,8 @@ import favoritesReducer from './favoritesSlice';
 import profileReducer from './profileSlice';
 import personalinfoReducer from './personalinfoSlice';
 import shotReducer from "./shotSlice";
+import themeReducer from "./themeSlice";
+
 
 //persist
 import { persistStore,persistReducer } from "redux-persist";
@@ -25,6 +27,8 @@ const store = configureStore({
         pay: persistReducer(persistConfig,payReducer),
         personalinfo: persistReducer(persistConfig,personalinfoReducer),
         shot:persistReducer(persistConfig,shotReducer),
+        theme:persistReducer(persistConfig,themeReducer),
+        
     },
     devTools: process.env.NODE_ENV !== 'production',
     middleware:(getDefaultMiddleware)=> 

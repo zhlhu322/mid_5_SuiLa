@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -233,7 +234,18 @@ const HomeStack = ({ navigation }) => {
         name="checkout"
         component={CheckOutScreen}
         options={{
-          title: '',
+          title: '結帳',
+          headerTitleStyle: {
+            fontWeight: '500',
+            fontSize: 20,
+            color: '#6A6A36'
+          },
+          headerLeft: () => (
+            <Text></Text>
+          ),
+          headerRight: () => (
+            <Text></Text>
+          ),
         }}
       />
     </Stack.Navigator>

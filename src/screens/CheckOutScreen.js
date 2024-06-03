@@ -3,6 +3,7 @@ import { ScrollView, Box, Text, HStack, VStack, FlatList, Image, View } from "@g
 import { TouchableOpacity, TextInput, Button } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Alert as RNAlert } from 'react-native'; // 引入React Native的Alert組件
+import { useNavigation } from '@react-navigation/native';
 
 import { useSelector } from 'react-redux';
 import { selectitems } from '../redux/paySlice';
@@ -15,6 +16,9 @@ const CheckOutScreen = () => {
     const [searchText, setSearchText] = useState('');
     const [totalAmount, setTotalAmount] = useState(0);
     const [discountedAmount, setDiscountedAmount] = useState(null); // 折扣後的金額
+    const { navigate } = useNavigation();
+    const navigation = useNavigation();
+
 
     useEffect(() => {
         // 計算總額
@@ -117,7 +121,9 @@ const CheckOutScreen = () => {
                     </HStack>
                     <View style={styles.horizontalLine} />
                     <Box style={styles.buttonBox}>
-                        <TouchableOpacity style={styles.button} onPress={() => RNAlert.alert("下單成功!", "可至訂單查詢查看您的訂單")} >
+                        <TouchableOpacity style={styles.button} onPress={() => {
+                            RNAlert.alert("下單成功!", "可至訂單查詢查看您的訂單",[{text:'OK',onPress:()=>navigation.navigate('Personalinfo')}])
+                        }} >
                             <Text style={{ fontSize: 24, color: "white" }}>下單</Text>
                         </TouchableOpacity>
                     </Box>
@@ -193,7 +199,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop:20
     },
     couponbutton:{
         justifyContent:'center'

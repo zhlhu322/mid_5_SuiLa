@@ -1,10 +1,13 @@
 import React from "react";
-import { Box, VStack, Text, Image, Pressable, Center } from "@gluestack-ui/themed";
+import { Box, VStack, Image, Pressable, Center } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, View,Text } from "react-native";
+import { useSelector } from 'react-redux';
 
 
 const ProductDetail = ({ product }) => {
   const { navigate } = useNavigation();
+  const darkMode = useSelector((state) => state.theme.darkMode);
 
   return (
     <Box
@@ -29,14 +32,23 @@ const ProductDetail = ({ product }) => {
           />
         </Pressable>
         <VStack height={60} justifyContent="space-evenly">
-          <Text fontSize={14}  color="black">{product.title}</Text>
-          <Text fontSize={14}  color="black" opacity={0.5}>${product.price}</Text>
+          <Text fontSize={14} style={darkMode ? styles.darkText : styles.lightText} >{product.title}</Text>
+          <Text fontSize={14}  style={darkMode ? styles.darkText : styles.lightText} opacity={0.5}>${product.price}</Text>
         </VStack>
 
       </VStack>
     </Box>
   );
 }
+const styles = StyleSheet.create({
+  darkText: {
+    color: '#565632',
+  },
+  lightText: {
+    color: '#000000',
+  },
+
+});
 
 
 export default ProductDetail;

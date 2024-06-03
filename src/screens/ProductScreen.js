@@ -5,6 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { Center, ScrollView, Box, Text, Pressable, HStack, VStack } from "@gluestack-ui/themed";
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Alert as RNAlert } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
@@ -49,9 +50,10 @@ const ProductScreen = ({ route }) => {
             quantity
         };
         dispatch(addToCart(product));
-        cart_toggleModal();
+        RNAlert.alert("SuiLa", "已成功加入購物車~",[{text:'OK', onPress: ()=> cart_toggleModal()}]);
         
     };
+
     const BuyNowHandler = () => {
         const product = {
             id: new Date().getTime().toString(),
@@ -97,6 +99,7 @@ const ProductScreen = ({ route }) => {
             dispatch(addFavorite({ title, image, price, img1, img2, img3, img4, size_chart }));
         }
     };
+
     useEffect(() => {
         const { nickname } = personalinfo;
         const { height, weight } = personalinfo;
@@ -108,7 +111,6 @@ const ProductScreen = ({ route }) => {
             setRecommendedSize('M');
         }
     }, [personalinfo]);
-
 
     return (
         <Center bgColor="white" height="100%">

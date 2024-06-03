@@ -7,6 +7,7 @@ import { Linking } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useSelector, useDispatch } from 'react-redux';
 import { setImageUri, removeImageUri } from '../redux/shotSlice';
+import { StyleSheet, View } from "react-native";
 
 
 
@@ -18,6 +19,8 @@ const PersonalinfoScreen = () => {
     const selectedImage = useSelector((state) => state.shot.uri);
     const [infoText, setInfoText] = useState(`${height || '秘密'} cm / ${weight || '秘密'} kg`);
     const [iconName, setIconName] = useState('emoticon-happy-outline');
+    const darkMode = useSelector((state) => state.theme.darkMode);
+
 
     const dispatch = useDispatch();
     async function openImagePickerAsync() {
@@ -124,8 +127,10 @@ const PersonalinfoScreen = () => {
         bg='#F5F7F1'
         alignItems="center"
         height="100%"
+        style={darkMode ? styles.darkContainer : styles.lightContainer}
       >
-        <HStack width="100%" justifyContent="space-evenly" alignItems="center" mt={50}>
+       
+        <HStack width="100%" justifyContent="space-evenly" alignItems="center" mt={50} >
           <Pressable
             justifyContent="center"
             alignItems="center"
@@ -301,5 +306,13 @@ const PersonalinfoScreen = () => {
     </Box>
   );
 };
-
+const styles = StyleSheet.create({
+    
+  darkContainer: {
+    backgroundColor: '#D1D1C0'
+  },
+  lightContainer: {
+    backgroundColor: '#F5F7F1'
+  },
+});
 export default PersonalinfoScreen;

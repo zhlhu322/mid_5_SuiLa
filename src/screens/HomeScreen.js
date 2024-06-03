@@ -1,10 +1,13 @@
 import React, { useState, useEffect }  from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View,Text } from "react-native";
 import { ScrollView } from "@gluestack-ui/themed";
 import { Dropdown } from 'react-native-element-dropdown';
 
 import Productlist from '../components/Productlist';
 import ProductData from '../json/ProductData.json';
+
+import { useSelector } from 'react-redux';
+
 
 
 const data = [
@@ -16,7 +19,8 @@ const data = [
 const HomeScreen = () => {
   const [value, setValue] = useState(null);
   const [sortedProductData, setSortedProductData] = useState([]);
-  
+  const darkMode = useSelector((state) => state.theme.darkMode);
+
   useEffect(() => {
     // 加載時獲取資料並排序商品
     sortProductData('1'); //預設為"為您推薦"
@@ -41,7 +45,8 @@ const HomeScreen = () => {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: "#F5F7F1" }}>
+    <View style={darkMode ? styles.darkContainer : styles.lightContainer}>
+    <ScrollView>
       <Dropdown
         style={styles.dropdown}
         data={data} 
@@ -58,6 +63,7 @@ const HomeScreen = () => {
       />
       <Productlist list={sortedProductData}/>
     </ScrollView>
+    </View>
 
   );
 };
@@ -86,7 +92,22 @@ const styles = StyleSheet.create({
   },
   selectedText:{
     marginLeft:10
-  }
+  },
+  darkContainer: {
+    backgroundColor: '#D1D1C0',
+    flex: 1,
+  },
+  lightContainer: {
+    backgroundColor: '#F5F7F1',
+    flex: 1,
+  },
+  darkText: {
+    color: '#6A6A54',
+  },
+  lightText: {
+    color: '#000000',
+  },
+
 });
 
 export default HomeScreen;
