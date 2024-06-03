@@ -19,6 +19,7 @@ const DisplaySettingScreen = () => {
       shadow={2} width="90%"
       mt="$2" px="$2" py="$4"
       bg="white" borderRadius={3}
+      alignSelf="center"
      >
       <HStack space={8} alignItems="center" >
          <Text size="lg" px="$2">Dark Mode</Text>
@@ -40,14 +41,10 @@ const styles = StyleSheet.create({
    darkContainer: {
      backgroundColor: '#D1D1C0',
      flex: 1,
-     alignItems: 'center',
-     justifyContent: 'center',
    },
    lightContainer: {
      backgroundColor: '#F5F7F1',
      flex: 1,
-     alignItems: 'center',
-     justifyContent: 'center',
    },
 });
 export default DisplaySettingScreen;
